@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_howl"
+            android:title="Howl"
+            android:checked="true"
+            />
+
+        <item
+            android:id="@+id/drawer_pack"
+            android:title="Pack"
+            />
+
+        <item
+            android:id="@+id/drawer_serendipity"
+            android:title="Serendipity"
+            />
+
+        <item
+            android:id="@+id/drawer_deals"
+            android:title="Deals"
+            />
+
+        <item
+            android:id="@+id/drawer_profile"
+            android:title="Profile"
+            />
+    </group>
+</menu>

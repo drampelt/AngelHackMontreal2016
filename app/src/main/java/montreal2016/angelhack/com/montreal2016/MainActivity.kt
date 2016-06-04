@@ -5,10 +5,12 @@ import android.content.Intent
 import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.ActionBarDrawerToggle
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -19,6 +21,16 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, G
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setSupportActionBar(toolbar)
+
+        navigationView.setNavigationItemSelectedListener {
+            return@setNavigationItemSelectedListener true
+        }
+
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
         gapi = GoogleApiClient.Builder(this)
             .addConnectionCallbacks(this)
@@ -46,7 +58,6 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, G
         val locationRequest = LocationRequest()
             .setInterval(10000L)
             .setFastestInterval(5000L)
-//            .setSmallestDisplacement(75.0f)
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
         val intent = Intent(this, BackgroundLocationService::class.java)
         val locationIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
