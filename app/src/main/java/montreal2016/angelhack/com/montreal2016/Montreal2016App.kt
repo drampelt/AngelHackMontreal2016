@@ -17,7 +17,7 @@ class Montreal2016App : Application() {
     override fun onCreate() {
         super.onCreate()
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://angelhack-mtl-cherylyli.c9users.io/")
+            .baseUrl("https://angelhackmtl-cherylyli.c9users.io/")
             .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
