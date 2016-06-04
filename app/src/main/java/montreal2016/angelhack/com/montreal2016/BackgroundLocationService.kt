@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.location.Location
-import com.google.android.gms.location.FusedLocationProviderApi
+import android.widget.Toast
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -14,8 +14,12 @@ import org.jetbrains.anko.info
 
 class BackgroundLocationService : BroadcastReceiver(), AnkoLogger {
     override fun onReceive(context: Context, intent: Intent) {
-        val location = intent.extras.get(FusedLocationProviderApi.KEY_LOCATION_CHANGED) as Location
-        info("got update ${location.longitude}, ${location.latitude}")
+        intent.extras.keySet().forEach { info("key $it") }
+        val location: Location? = intent.extras.getParcelable<Location>("com.google.android.location.LOCATION")
+        if (location != null) {
+            Toast.makeText(context, "got update ${location.longitude} ${location.latitude}", Toast.LENGTH_SHORT).show()
+            info("got update ${location.longitude}, ${location.latitude}")
+        }
     }
 
 }
