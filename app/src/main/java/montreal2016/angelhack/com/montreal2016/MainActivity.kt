@@ -24,7 +24,20 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, G
 
         setSupportActionBar(toolbar)
 
-        navigationView.setNavigationItemSelectedListener {
+        navigationView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.drawer_howl -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, HowlFragment())
+                        .commit()
+                }
+                R.id.drawer_serendipity -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, SerendipityFragment())
+                        .commit()
+                }
+            }
+            drawerLayout.closeDrawers()
             return@setNavigationItemSelectedListener true
         }
 
