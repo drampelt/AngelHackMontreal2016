@@ -62,7 +62,7 @@ class PackProfileFragment : Fragment(), AnkoLogger {
             Picasso.with(activity).load("http://placekitten.com/400/${390 + pack.packName.hashCode() % 20}").into(profilePicture)
             actionButton.onClick {
                 app.netService.joinPack(app.username, pack.packName).subscribe({ res ->
-                    activity.setResult(Activity.RESULT_OK)
+                    (activity as PackProfileActivity).reload()
                 }, {})
             }
             memberCount.text = "${pack.packUsers.size} Member${if (pack.packUsers.size == 1) "" else "s" }"

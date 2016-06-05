@@ -35,4 +35,10 @@ class PackProfileActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    fun reload() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, PackProfileFragment())
+            .commit()
+    }
 }
