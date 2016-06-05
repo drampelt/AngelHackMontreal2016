@@ -18,6 +18,7 @@ class BackgroundLocationService : BroadcastReceiver(), AnkoLogger {
         if (location != null) {
             info("got update ${location.longitude}, ${location.latitude}")
             val app = context.applicationContext as Montreal2016App
+            app.location = location
             app.netService.updateLocation(User(app.username, location.latitude, location.longitude)).subscribe({ res ->
                 info("got response ${res.string()}")
             }, { throwable ->

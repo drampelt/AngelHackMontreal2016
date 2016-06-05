@@ -77,7 +77,7 @@ class HowlFragment : Fragment(), AnkoLogger {
                         .position(LatLng(it.locationLat, it.locationLong))
                         .title(it.packName)
                         .snippet(it.packDescription)
-//                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_wolf))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_wolf))
                     )
                 }.toMutableList()
             }, { throwable ->

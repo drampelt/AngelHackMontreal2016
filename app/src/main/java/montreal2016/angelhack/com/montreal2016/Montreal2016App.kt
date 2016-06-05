@@ -1,6 +1,7 @@
 package montreal2016.angelhack.com.montreal2016
 
 import android.app.Application
+import android.location.Location
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,6 +13,7 @@ import rx.schedulers.Schedulers
 
 class Montreal2016App : Application() {
     var username = ""
+    var location: Location? = null
     lateinit var netService: NetService
 
     override fun onCreate() {

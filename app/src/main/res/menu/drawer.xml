@@ -14,17 +14,7 @@
 
         <item
             android:id="@+id/drawer_serendipity"
-            android:title="Serendipity"
-            />
-
-        <item
-            android:id="@+id/drawer_deals"
-            android:title="Deals"
-            />
-
-        <item
-            android:id="@+id/drawer_profile"
-            android:title="Profile"
+            android:title="Discover"
             />
     </group>
 </menu>
