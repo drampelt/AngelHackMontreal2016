@@ -56,9 +56,9 @@ class HowlFragment : Fragment(), AnkoLogger {
             map.setOnMarkerClickListener { marker ->
                 val name = marker.title
                 val description = marker.snippet
-                startActivity<ProfileActivity>(
-                    ProfileActivity.EXTRA_NAME to name,
-                    ProfileActivity.EXTRA_DESCRIPTION to description
+                startActivity<PackProfileActivity>(
+                    PackProfileActivity.EXTRA_NAME to name,
+                    PackProfileActivity.EXTRA_DESCRIPTION to description
                 )
                 true
             }
@@ -67,14 +67,14 @@ class HowlFragment : Fragment(), AnkoLogger {
 
     private fun loadPacks() {
         val app = activity.application as Montreal2016App
-        app.netService.howl(app.name)
+        app.netService.howl(app.username)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ packs ->
                 info("got the packs ${packs.size}")
                 markers.forEach { it.remove() }
                 markers = packs.map {
                     map.addMarker(MarkerOptions()
-                        .position(LatLng(it.locationLong, it.locationLat))
+                        .position(LatLng(it.locationLat, it.locationLong))
                         .title(it.packName)
                         .snippet(it.packDescription)
 //                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_wolf))

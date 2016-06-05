@@ -11,7 +11,7 @@ import rx.schedulers.Schedulers
  */
 
 class Montreal2016App : Application() {
-    var name: String = ""
+    var username = ""
     lateinit var netService: NetService
 
     override fun onCreate() {

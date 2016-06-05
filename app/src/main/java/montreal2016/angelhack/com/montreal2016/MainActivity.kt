@@ -31,15 +31,26 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, G
                         .replace(R.id.container, HowlFragment())
                         .commit()
                 }
+                R.id.drawer_pack -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, PackProfileFragment())
+                        .commit()
+                }
                 R.id.drawer_serendipity -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, SerendipityFragment())
                         .commit()
                 }
             }
+            supportActionBar?.title = item.title
             drawerLayout.closeDrawers()
             return@setNavigationItemSelectedListener true
         }
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, HowlFragment())
+            .commit()
+        supportActionBar?.title = "Howl"
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
         drawerLayout.addDrawerListener(toggle)

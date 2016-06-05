@@ -21,7 +21,7 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
             if (name.isNullOrEmpty()) return@onClick
 
             app.netService.login(name).subscribe({ res ->
-                app.name = res.string()
+                app.username = res.string()
                 startActivity<MainActivity>()
             }, { throwable ->
                 error("Something bad happened", throwable)

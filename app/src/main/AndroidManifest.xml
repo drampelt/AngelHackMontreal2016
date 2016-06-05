@@ -37,8 +37,10 @@
             android:value="@string/google_maps_key"
             />
 
-        <activity android:name=".ProfileActivity">
-        </activity>
+        <activity
+            android:name=".PackProfileActivity"
+            android:label="Profile"
+            />
     </application>
 
 </manifest>
