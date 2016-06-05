@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class CustomList extends ArrayAdapter<Event> {
     private Event[] events;
     private Context context;
@@ -28,13 +30,11 @@ public class CustomList extends ArrayAdapter<Event> {
         LayoutInflater inflater = LayoutInflater.from(context);
         View listViewItem = inflater.inflate(R.layout.list_layout, null, true);
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
-        // TextView textViewDesc = (TextView) listViewItem.findViewById(R.id.textViewDesc);
         ImageView image = (ImageView) listViewItem.findViewById(R.id.imageView);
         Event event = events[position];
 
         textViewName.setText(event.getTitle());
-        // textViewDesc.setText(desc[position]);
-        // image.setImageResource(image[position]);
+        Picasso.with(context).load("http://" + event.getImageUrl()).into(image);
         return  listViewItem;
     }
 }

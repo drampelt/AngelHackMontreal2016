@@ -52,9 +52,6 @@ public class SerendipityFragment extends Fragment {
                         Toast.makeText(getActivity().getApplicationContext(),"You Clicked ", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                
-
             }
 
             @Override
