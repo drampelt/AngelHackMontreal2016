@@ -3,16 +3,20 @@ package montreal2016.angelhack.com.montreal2016
 import android.app.PendingIntent
 import android.content.Intent
 import android.location.Location
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AppCompatActivity
+import android.widget.ImageView
+import android.widget.TextView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import java.util.*
 
 class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, AnkoLogger {
 
@@ -21,6 +25,8 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, G
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val app = application as Montreal2016App
 
         setSupportActionBar(toolbar)
 
@@ -55,6 +61,14 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, G
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+        val header = navigationView.getHeaderView(0)
+        val picture = header.findViewById(R.id.profilePicture) as ImageView
+        Picasso.with(this@MainActivity)
+            .load("http://placekitten.com/152/${147 + Random().nextInt(10)}")
+            .into(picture)
+        val username = header.findViewById(R.id.username) as TextView
+        username.text = app.username
 
         gapi = GoogleApiClient.Builder(this)
             .addConnectionCallbacks(this)
