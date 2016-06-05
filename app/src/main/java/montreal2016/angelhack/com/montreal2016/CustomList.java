@@ -43,9 +43,9 @@ public class CustomList extends ArrayAdapter<Event> {
         location.setLatitude(Double.parseDouble(latlng[0]));
         location.setLongitude(Double.parseDouble(latlng[1]));
         if (app.getLocation() != null) {
-            float dist = location.distanceTo(app.getLocation());
-            DecimalFormat df = new DecimalFormat("#");
-            distance.setText(df.format(dist) + "m away");
+            float dist = location.distanceTo(app.getLocation()) / 1000;
+            DecimalFormat df = new DecimalFormat("#.0");
+            distance.setText(df.format(dist) + "km away");
         } else {
             distance.setText("");
         }
