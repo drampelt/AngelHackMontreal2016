@@ -1,6 +1,7 @@
 package montreal2016.angelhack.com.montreal2016
 
 import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.*
 import rx.Observable
 
@@ -27,4 +28,8 @@ interface NetService {
     @FormUrlEncoded
     @POST("whichPack")
     fun whichPack(@Field("username") username: String): Observable<WhichPackResponse>
+
+    @FormUrlEncoded
+    @POST("getevents")
+    fun getEvents(@Field("username") username: String): Call<MutableList<Event>>
 }
