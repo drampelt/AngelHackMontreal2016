@@ -1,6 +1,7 @@
 package montreal2016.angelhack.com.montreal2016
 
 import android.app.Activity
+import android.database.DataSetObserver
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
@@ -37,6 +38,12 @@ class ChatActivity : AppCompatActivity() {
         app = application as Montreal2016App
         val adapter = ChatAdapter(chatRef.limitToLast(50), R.layout.list_item_chat, app.username)
         chatMessages.adapter = adapter
+        adapter.registerDataSetObserver(object : DataSetObserver() {
+            override fun onChanged() {
+                super.onChanged()
+                chatMessages.setSelection(adapter.count - 1)
+            }
+        })
 
         sendButton.onClick { sendMessage() }
         messageField.setOnEditorActionListener { textView, actionId, keyEvent ->
