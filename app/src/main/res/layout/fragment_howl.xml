@@ -20,8 +20,8 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="32dp"
         android:alpha="0.5"
-        app:srcCompat="@drawable/ic_howl"
-        android:background="@drawable/circle"
+        app:srcCompat="@drawable/ic_howl2"
+        android:background="@drawable/circle_background"
         />
 
 </FrameLayout>

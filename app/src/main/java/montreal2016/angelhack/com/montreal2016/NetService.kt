@@ -23,7 +23,7 @@ interface NetService {
 
     @FormUrlEncoded
     @POST("join")
-    fun joinPack(@Field("username") username: String, @Field("packname") packname: String)
+    fun joinPack(@Field("username") username: String, @Field("packName") packName: String): Observable<ResponseBody>
 
     @FormUrlEncoded
     @POST("whichPack")

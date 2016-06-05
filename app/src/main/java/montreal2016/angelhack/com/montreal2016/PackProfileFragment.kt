@@ -1,5 +1,6 @@
 package montreal2016.angelhack.com.montreal2016
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -16,7 +17,6 @@ import org.jetbrains.anko.error
 import org.jetbrains.anko.onClick
 import org.jetbrains.anko.support.v4.startActivity
 import rx.android.schedulers.AndroidSchedulers
-import java.util.*
 
 /**
  * Created by daniel on 2016-06-05.
@@ -24,8 +24,7 @@ import java.util.*
 
 class PackProfileFragment : Fragment(), AnkoLogger {
     companion object {
-        val ARG_NAME = "name"
-        val ARG_DESCRIPTION = "description"
+        val ARG_PACK = "pack"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,10 +33,9 @@ class PackProfileFragment : Fragment(), AnkoLogger {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val eName: String? = arguments?.getString(ARG_NAME, null)
-        val eDesc: String? = arguments?.getString(ARG_DESCRIPTION, null)
+        val pack: Pack? = arguments?.getParcelable(ARG_PACK)
         val app = activity.application as Montreal2016App
-        if (eName == null) {
+        if (pack == null) {
             profile.visibility = View.GONE
             app.netService.whichPack(app.username).observeOn(AndroidSchedulers.mainThread()).subscribe({ pack ->
                 if (pack.hasPack) {
@@ -59,10 +57,19 @@ class PackProfileFragment : Fragment(), AnkoLogger {
                 error("something bad happened", throwable)
             })
         } else {
-            name.text = eName
-            description.text = eDesc
-            Picasso.with(activity).load("http://placekitten.com/400/${390 + eName.hashCode() % 20}").into(profilePicture)
-
+            name.text = pack.packName
+            description.text = pack.packDescription
+            Picasso.with(activity).load("http://placekitten.com/400/${390 + pack.packName.hashCode() % 20}").into(profilePicture)
+            actionButton.onClick {
+                app.netService.joinPack(app.username, pack.packName).subscribe({ res ->
+                    (activity as PackProfileActivity).reload()
+                }, {})
+            }
+            memberCount.text = "${pack.packUsers.size} Member${if (pack.packUsers.size == 1) "" else "s" }"
+            members.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            val adapter = UserAdapter()
+            adapter.users = pack.packUsers
+            members.adapter = adapter
         }
     }
 
