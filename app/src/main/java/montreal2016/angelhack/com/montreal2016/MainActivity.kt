@@ -69,9 +69,9 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, G
         }
 
         val locationRequest = LocationRequest()
-            .setInterval(10000L)
-            .setFastestInterval(5000L)
-            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+            .setInterval(120000L)
+            .setFastestInterval(15000L)
+            .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
         val intent = Intent(this, BackgroundLocationService::class.java)
         val locationIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         LocationServices.FusedLocationApi.requestLocationUpdates(gapi, locationRequest, locationIntent)
