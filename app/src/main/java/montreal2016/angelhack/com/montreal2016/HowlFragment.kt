@@ -27,6 +27,7 @@ import rx.android.schedulers.AndroidSchedulers
 class HowlFragment : Fragment(), AnkoLogger {
     private lateinit var map: GoogleMap
     private var markers: MutableList<Marker> = mutableListOf()
+    private var packs: MutableList<Pack> = mutableListOf()
     private var zoomed = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,11 +55,9 @@ class HowlFragment : Fragment(), AnkoLogger {
             }
 
             map.setOnMarkerClickListener { marker ->
-                val name = marker.title
-                val description = marker.snippet
+                val pack = packs[markers.indexOf(marker)]
                 startActivity<PackProfileActivity>(
-                    PackProfileActivity.EXTRA_NAME to name,
-                    PackProfileActivity.EXTRA_DESCRIPTION to description
+                    PackProfileActivity.EXTRA_PACK to pack
                 )
                 true
             }
@@ -70,6 +69,7 @@ class HowlFragment : Fragment(), AnkoLogger {
         app.netService.howl(app.username)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ packs ->
+                this.packs = packs
                 info("got the packs ${packs.size}")
                 markers.forEach { it.remove() }
                 markers = packs.map {

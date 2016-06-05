@@ -8,8 +8,7 @@ import org.jetbrains.anko.support.v4.withArguments
 class PackProfileActivity : AppCompatActivity() {
 
     companion object {
-        val EXTRA_NAME = "name"
-        val EXTRA_DESCRIPTION = "description"
+        val EXTRA_PACK = "pack"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,12 +17,11 @@ class PackProfileActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val eName = intent.getStringExtra(EXTRA_NAME)
-        val eDesc = intent.getStringExtra(EXTRA_DESCRIPTION)
+        val pack: Pack = intent.getParcelableExtra(EXTRA_PACK)
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, PackProfileFragment().withArguments(
-                PackProfileFragment.ARG_NAME to eName,
-                PackProfileFragment.ARG_DESCRIPTION to eDesc
+                PackProfileFragment.ARG_PACK to pack
             ))
             .commit()
     }
