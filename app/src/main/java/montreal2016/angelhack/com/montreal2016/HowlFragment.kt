@@ -17,6 +17,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
 import org.jetbrains.anko.info
 import org.jetbrains.anko.onClick
+import org.jetbrains.anko.support.v4.startActivity
 import rx.android.schedulers.AndroidSchedulers
 
 /**
@@ -50,6 +51,16 @@ class HowlFragment : Fragment(), AnkoLogger {
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 16f))
                     zoomed = true
                 }
+            }
+
+            map.setOnMarkerClickListener { marker ->
+                val name = marker.title
+                val description = marker.snippet
+                startActivity<ProfileActivity>(
+                    ProfileActivity.EXTRA_NAME to name,
+                    ProfileActivity.EXTRA_DESCRIPTION to description
+                )
+                true
             }
         }
     }
