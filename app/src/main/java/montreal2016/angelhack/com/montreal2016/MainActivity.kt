@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks, G
         val header = navigationView.getHeaderView(0)
         val picture = header.findViewById(R.id.profilePicture) as ImageView
         Picasso.with(this@MainActivity)
-            .load("http://placekitten.com/152/${147 + Random().nextInt(10)}")
+            .load("http://placekitten.com/128/${123 + app.username.hashCode() % 10}")
             .into(picture)
         val username = header.findViewById(R.id.username) as TextView
         username.text = app.username

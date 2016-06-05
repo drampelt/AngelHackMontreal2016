@@ -2,9 +2,13 @@ package montreal2016.angelhack.com.montreal2016
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pack_profile.*
 import org.jetbrains.anko.AnkoLogger
@@ -41,8 +45,13 @@ class PackProfileFragment : Fragment(), AnkoLogger {
                     description.text = pack.packDescription
                     actionButton.text = "Chat"
                     actionButton.onClick { startActivity<ChatActivity>(ChatActivity.EXTRA_PACK to pack.packName) }
-                    Picasso.with(activity).load("http://placekitten.com/400/${390 + Random().nextInt(20)}").into(profilePicture)
+                    Picasso.with(activity).load("http://placekitten.com/400/${390 + pack.packName.hashCode() % 20}").into(profilePicture)
                     profile.visibility = View.VISIBLE
+                    memberCount.text = "${pack.packMembers.size} Member${if (pack.packMembers.size == 1) "" else "s" }"
+                    members.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    val adapter = UserAdapter()
+                    adapter.users = pack.packMembers
+                    members.adapter = adapter
                 } else {
                     noPack.visibility = View.VISIBLE
                 }
@@ -52,8 +61,36 @@ class PackProfileFragment : Fragment(), AnkoLogger {
         } else {
             name.text = eName
             description.text = eDesc
-            Picasso.with(activity).load("http://placekitten.com/400/${390 + Random().nextInt(20)}").into(profilePicture)
+            Picasso.with(activity).load("http://placekitten.com/400/${390 + eName.hashCode() % 20}").into(profilePicture)
 
         }
+    }
+
+    inner class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
+
+        var users: MutableList<String> = mutableListOf()
+
+        override fun onBindViewHolder(holder: UserHolder, position: Int) {
+            holder.bind(users[position])
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): UserHolder? {
+            val view = LayoutInflater.from(context).inflate(R.layout.list_item_user, parent, false)
+            return UserHolder(view)
+        }
+
+        override fun getItemCount(): Int = users.size
+
+        inner class UserHolder(view: View) : RecyclerView.ViewHolder(view) {
+            fun bind(user: String) {
+                val image = itemView.findViewById(R.id.profilePicture) as ImageView
+                val name = itemView.findViewById(R.id.username) as TextView
+                Picasso.with(this@PackProfileFragment.context)
+                    .load("http://placekitten.com/128/${123 + user.hashCode() % 10}")
+                    .into(image)
+                name.text = user
+            }
+        }
+
     }
 }

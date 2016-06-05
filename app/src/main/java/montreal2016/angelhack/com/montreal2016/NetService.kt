@@ -22,7 +22,7 @@ interface NetService {
 
     @FormUrlEncoded
     @POST("join")
-    fun joinBack(@Field("username") username: String, @Field("packname") packname: String)
+    fun joinPack(@Field("username") username: String, @Field("packname") packname: String)
 
     @FormUrlEncoded
     @POST("whichPack")

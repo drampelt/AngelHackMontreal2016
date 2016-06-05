@@ -4,6 +4,7 @@ import android.app.Activity
 import android.database.DataSetObserver
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
@@ -79,9 +80,9 @@ class ChatActivity : AppCompatActivity() {
             val message = v.findViewById(R.id.message) as TextView
             author.text = "${model.author}: "
             if (model.author == username) {
-                author.textColor = 0xff0000.opaque
+                author.textColor = ContextCompat.getColor(this@ChatActivity, R.color.colorAccent)
             } else {
-                author.textColor = 0x00ff00.opaque
+                author.textColor = ContextCompat.getColor(this@ChatActivity, R.color.colorPrimary)
             }
             message.text = model.message
         }
