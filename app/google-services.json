@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "21759096514",
+    "firebase_url": "https://skillful-garden-133221.firebaseio.com",
+    "project_id": "skillful-garden-133221",
+    "storage_bucket": "skillful-garden-133221.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21759096514:android:0466350e09741bd3",
+        "android_client_info": {
+          "package_name": "montreal2016.angelhack.com.montreal2016"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21759096514-qbr3dnvekqc6vdkd8he504gmq8jrcn7q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "montreal2016.angelhack.com.montreal2016",
+            "certificate_hash": "42D0EEF7216DC37C4859014E202B469023057C60"
+          }
+        },
+        {
+          "client_id": "21759096514-209g6sbeaka7sq9hpdbf4p544n7n33le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1N_ML6FPxTbZC7GextWxRT2HRPDNMhB8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21759096514-209g6sbeaka7sq9hpdbf4p544n7n33le.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

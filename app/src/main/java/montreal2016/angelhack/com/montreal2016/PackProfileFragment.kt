@@ -9,6 +9,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pack_profile.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
+import org.jetbrains.anko.onClick
+import org.jetbrains.anko.support.v4.startActivity
 import rx.android.schedulers.AndroidSchedulers
 import java.util.*
 
@@ -37,7 +39,8 @@ class PackProfileFragment : Fragment(), AnkoLogger {
                 if (pack.hasPack) {
                     name.text = pack.packName
                     description.text = pack.packDescription
-                    actionButton.text = "Leave Pack"
+                    actionButton.text = "Chat"
+                    actionButton.onClick { startActivity<ChatActivity>(ChatActivity.EXTRA_PACK to pack.packName) }
                     Picasso.with(activity).load("http://placekitten.com/400/${390 + Random().nextInt(20)}").into(profilePicture)
                     profile.visibility = View.VISIBLE
                 } else {

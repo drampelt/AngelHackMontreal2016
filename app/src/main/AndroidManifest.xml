@@ -41,6 +41,11 @@
             android:name=".PackProfileActivity"
             android:label="Profile"
             />
+        <activity
+            android:name=".ChatActivity"
+            android:label="Chat"
+            android:windowSoftInputMode="adjustResize"
+            />
     </application>
 
 </manifest>
